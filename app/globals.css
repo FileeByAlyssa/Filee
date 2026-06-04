@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #F5F0E8;
+  --bg2: #FFFDF8;
+  --dark: #2C1F14;
+  --mid: #3D2B1A;
+  --accent: #C4956A;
+  --accent-dark: #7A5C45;
+  --muted: #A89880;
+  --border: #DDD5C5;
+  --green-light: #D6E8D8;
+  --green-dark: #3D6645;
+  --tag-bg: #EBE0D0;
+  --tag-text: #7A5C45;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--dark);
+  -webkit-font-smoothing: antialiased;
+}
