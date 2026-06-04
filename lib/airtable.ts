@@ -16,6 +16,7 @@ export type Ressource = {
   duree: string;
   statut: 'En attente' | 'Publié' | 'Refusé';
   dateAjout: string;
+  image: string;
 };
 
 export async function getRessources(filters?: {
@@ -43,6 +44,7 @@ export async function getRessources(filters?: {
     duree: record.get('Durée') || '',
     statut: record.get('Statut') || '',
     dateAjout: record.get('Date ajout') || '',
+    image: record.get('Miniature') || '', // 👈 Mis à jour ici avec "Miniature" !
   }));
 
   if (filters?.type) ressources = ressources.filter(r => r.type === filters.type);
