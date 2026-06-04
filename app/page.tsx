@@ -136,11 +136,25 @@ export default function Home() {
   );
 }
 
+function getYoutubeThumbnail(url: string): string | null {
+  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/);
+  return match ? `https://img.youtube.com/vi/${match[1]}/mqdefault.jpg` : null;
+}
+
 function CarteRessource({ r }: { r: Ressource }) {
+  const thumbnail = r.type === 'YouTube' ? getYoutubeThumbnail(r.url) : null;
   return (
     <a href={r.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-      <div style={{ background: 'var(--bg2)', borderRadius: 12, border: '0.5px solid var(--border)', overflow: 'hidden', cursor: 'pointer' }} onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--accent)')} onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--border)')}>
-        <div style={{ height: 64, background: TYPE_COLOR[r.type] || 'var(--tag-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24 }}>{TYPE_ICON[r.type] || '✦'}</div>
+      <div style={{ background: 'var(--bg2)', borderRadius: 12, border: '0.5px solid var(--border)', overflow: 'hidden', cursor: 'pointer' }}
+        onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--accent)')}
+        onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--border)')}>
+        <div style={{ height: 80, background: TYPE_COLOR[r.type] || 'var(--tag-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, overflow: 'hidden', position: 'relative' }}>
+          {thumbnail ? (
+            <img src={thumbnail} alt={r.titre} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          ) : (
+            TYPE_ICON[r.type] || '✦'
+          )}
+        </div>
         <div style={{ padding: '12px 14px' }}>
           <div style={{ display: 'flex', gap: 6, marginBottom: 6, flexWrap: 'wrap' }}>
             {r.niveau && <Badge text={r.niveau} bg="var(--tag-bg)" color="var(--tag-text)" />}
